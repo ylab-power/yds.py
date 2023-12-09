@@ -1,0 +1,8 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "yds"
+description = "Some small utils of data structures"
+version = "0.0.1"

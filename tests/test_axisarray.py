@@ -45,10 +45,14 @@ def test_set_dim_names(axis_array):
 
 def test_v(axis_array):
     assert axis_array.v(0, 1) == 2
+    assert np.allclose(axis_array.v(0, slice(None)), axis_array.values[0, :])
+    assert np.allclose(axis_array.v(slice(None), 1), axis_array.values[:, 1])
 
 
 def test_v_kw(axis_array):
     assert axis_array.v_kw(x=0, y=1) == 2
+    assert np.allclose(axis_array.v_kw(x=0), axis_array.values[0, :])
+    assert np.allclose(axis_array.v_kw(y=1), axis_array.values[:, 1])
 
 
 def test_sv(axis_array):

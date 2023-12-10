@@ -21,23 +21,23 @@ class AxisArray:
         self.dim_coord[dim] = coord
         self.dim_lookup[dim] = {v: i for i, v in enumerate(coord)}
 
-    def set_coord(self, name, coord):
+    def set_coord(self, name: str, coord):
         dim = self.name_to_dim.get(name, None)
         if dim is None:
             raise KeyError(f"Dimension {name} not found")
         self.dim_coord[dim] = coord
         self.dim_lookup[dim] = {v: i for i, v in enumerate(coord)}
 
-    def get_icoord(self, dim):
+    def get_icoord(self, dim: int):
         return self.dim_coord[dim]
 
-    def get_coord(self, name):
+    def get_coord(self, name: str):
         dim = self.name_to_dim.get(name, None)
         if dim is None:
             raise KeyError(f"Dimension {name} not found")
         return self.dim_coord[dim]
 
-    def set_dim_names(self, names):
+    def set_dim_names(self, names: list[str]):
         assert len(names) == self.values.ndim
         self.dim_names = names
         self.name_to_dim = {name: i for i, name in enumerate(self.dim_names)}
@@ -51,6 +51,9 @@ class AxisArray:
     def v(self, *labels):
         indices = []
         for dim, index in enumerate(labels):
+            if index == slice(None):
+                indices.append(index)
+                continue
             lookup = self.dim_lookup[dim]
             if lookup is None:
                 indices.append(index)
@@ -61,6 +64,9 @@ class AxisArray:
     def sv(self, labels: tuple, value):
         indices = []
         for dim, index in enumerate(labels):
+            if index == slice(None):
+                indices.append(index)
+                continue
             lookup = self.dim_lookup[dim]
             if lookup is None:
                 indices.append(index)
@@ -68,7 +74,7 @@ class AxisArray:
                 indices.append(lookup[index])
         self.values[tuple(indices)] = value
 
-    def v_kw(self, **labels_kw):
+    def v_kw(self, **labels_kw: dict[str, any]):
         indices = [slice(None)] * self.values.ndim
         for name, index in labels_kw.items():
             dim = self.name_to_dim.get(name, None)
@@ -81,7 +87,7 @@ class AxisArray:
                 indices[dim] = lookup[index]
         return self.values[tuple(indices)]
 
-    def sv_kw(self, labels_dict, value):
+    def sv_kw(self, labels_dict: dict[str, any], value):
         indices = [slice(None)] * self.values.ndim
         for name, index in labels_dict.items():
             dim = self.name_to_dim.get(name, None)

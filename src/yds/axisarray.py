@@ -37,6 +37,11 @@ class AxisArray:
             raise KeyError(f"Dimension {name} not found")
         return self.dim_coord[dim]
 
+    def set_dim_names(self, names):
+        assert len(names) == self.values.ndim
+        self.dim_names = names
+        self.name_to_dim = {name: i for i, name in enumerate(self.dim_names)}
+
     def __getitem__(self, item):
         return self.values[item]
 

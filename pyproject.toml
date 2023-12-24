@@ -6,7 +6,7 @@ build-backend = "setuptools.build_meta"
 name = "yds"
 description = "Some small utilities of data structures"
 version = "0.0.1"
-license = "MIT"
+license = {text = "MIT"}
 readme = "README.md"
 keywords = ["data structures"]
 classifiers = [

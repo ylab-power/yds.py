@@ -4,5 +4,14 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "yds"
-description = "Some small utils of data structures"
+description = "Some small utilities of data structures"
 version = "0.0.1"
+license = "MIT"
+readme = "README.md"
+keywords = ["data structures"]
+classifiers = [
+    "Development Status :: 1 - Planning",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+]

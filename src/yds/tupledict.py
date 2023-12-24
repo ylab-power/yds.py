@@ -115,7 +115,7 @@ def flatten_tuple(t):
             yield it
 
 
-def make_tupledict(*coords: list[Iterable], rule):
+def make_tupledict(*coords: Iterable, rule):
     kvs = []
     assert len(coords) > 0
     for coord in product(*coords):
